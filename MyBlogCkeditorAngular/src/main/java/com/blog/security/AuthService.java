@@ -1,10 +1,11 @@
 package com.blog.security;
+
 import com.blog.models.AuthenticationResponse;
 import com.blog.models.LoginRequest;
 import com.blog.models.RegisterRequest;
 import com.blog.models.Users;
 import com.blog.repository.UserRepository;
-import com.blog.security.JwtProvider;
+//import com.blog.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,16 +23,17 @@ public class AuthService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private JwtProvider jwtProvider;
+  //  @Autowired
+  //  private AuthenticationManager authenticationManager;
+ //   @Autowired
+    //private JwtProvider jwtProvider;
 
     public void signup(RegisterRequest registerRequest) {
         Users user = new Users();
         user.setUserName(registerRequest.getUserName());
         user.setUserEmail(registerRequest.getUserEmail());
-        user.setUserpassword(encodePassword(registerRequest.getUserpassword()));
+       // user.setUserpassword(encodePassword(registerRequest.getUserpassword()));
+        user.setUserpassword(registerRequest.getUserpassword());
 
         userRepository.save(user);
     }
@@ -40,14 +42,14 @@ public class AuthService {
         return passwordEncoder.encode(password);
     }
 
-    public AuthenticationResponse login(LoginRequest loginRequest) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
-                loginRequest.getUserPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
-        String authenticationToken = jwtProvider.generateToken(authenticate);
-        return new AuthenticationResponse(authenticationToken, loginRequest.getUserName());
-        
-    }
+//    public AuthenticationResponse login(LoginRequest loginRequest) {
+//        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
+//                loginRequest.getUserPassword()));
+//        SecurityContextHolder.getContext().setAuthentication(authenticate);
+//        String authenticationToken="0000000";// = jwtProvider.generateToken(authenticate);
+//        return new AuthenticationResponse(authenticationToken, loginRequest.getUserName());
+//        
+//    }
 
     public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
