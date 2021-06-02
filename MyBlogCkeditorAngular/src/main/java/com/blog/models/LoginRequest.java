@@ -1,41 +1,34 @@
 package com.blog.models;
 
 public class LoginRequest {
-    private String userName;
+	private String username;
+	private String password;
 
-    private String userPassword;
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-
-	public LoginRequest(String userName, String userPassword) {
+	public LoginRequest(String username, String password) {
 		super();
-		this.userName = userName;
-		this.userPassword = userPassword;
+		this.username = username;
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public LoginRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-	
-	
-
-
 
 }

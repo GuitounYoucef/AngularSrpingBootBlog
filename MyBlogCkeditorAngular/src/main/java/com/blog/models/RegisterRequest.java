@@ -3,38 +3,39 @@ package com.blog.models;
 
 
 public class RegisterRequest {
-	private String UserName;
-	private String Userpassword;
-	private String UserEmail;
-
-	public String getUserName() {
-		return UserName;
+	private String name;
+	private String password;
+	private String email;
+	public String getName() {
+		return name;
 	}
-	public void setUserName(String userName) {
-		UserName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getUserpassword() {
-		return Userpassword;
+	public String getPassword() {
+		return password;
 	}
-	public void setUserpassword(String userpassword) {
-		Userpassword = userpassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getUserEmail() {
-		return UserEmail;
+	public String getEmail() {
+		return email;
 	}
-	public void setUserEmail(String userEmail) {
-		UserEmail = userEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public RegisterRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public RegisterRequest(String userName, String userpassword, String userEmail) {
+	public RegisterRequest(String name, String password, String email) {
 		super();
-		UserName = userName;
-		Userpassword = userpassword;
-		UserEmail = userEmail;
+		this.name = name;
+		this.password = password;
+		this.email = email;
 	}
+
+
 	
 
 }

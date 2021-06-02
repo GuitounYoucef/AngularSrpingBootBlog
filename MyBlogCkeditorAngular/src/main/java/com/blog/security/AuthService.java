@@ -23,18 +23,16 @@ public class AuthService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-  //  @Autowired
-  //  private AuthenticationManager authenticationManager;
- //   @Autowired
-    //private JwtProvider jwtProvider;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtProvider jwtProvider;
 
     public void signup(RegisterRequest registerRequest) {
         Users user = new Users();
-        user.setUserName(registerRequest.getUserName());
-        user.setUserEmail(registerRequest.getUserEmail());
-       // user.setUserpassword(encodePassword(registerRequest.getUserpassword()));
-        user.setUserpassword(registerRequest.getUserpassword());
-
+        user.setUserName(registerRequest.getName());
+        user.setUserEmail(registerRequest.getEmail());
+        user.setUserpassword(encodePassword(registerRequest.getPassword()));
         userRepository.save(user);
     }
 
@@ -42,14 +40,14 @@ public class AuthService {
         return passwordEncoder.encode(password);
     }
 
-//    public AuthenticationResponse login(LoginRequest loginRequest) {
-//        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
-//                loginRequest.getUserPassword()));
-//        SecurityContextHolder.getContext().setAuthentication(authenticate);
-//        String authenticationToken="0000000";// = jwtProvider.generateToken(authenticate);
-//        return new AuthenticationResponse(authenticationToken, loginRequest.getUserName());
-//        
-//    }
+    public AuthenticationResponse login(LoginRequest loginRequest) {
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        String authenticationToken=jwtProvider.generateToken(authenticate);
+        return new AuthenticationResponse(authenticationToken, loginRequest.getUsername());
+        
+    }
 
     public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
