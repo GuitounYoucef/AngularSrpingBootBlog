@@ -38,6 +38,11 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
     authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 }
+
+@Bean
+public JwtAuthenticationFilter jwtAuthenticationFilter() {
+    return new JwtAuthenticationFilter();
+}
 // Authorization
 @Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -54,9 +59,9 @@ public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBu
    .antMatchers("/blog/posts/{id}")
    .permitAll()   
    .anyRequest()
-   .authenticated();
-   //.and()
-   //.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+   .authenticated()
+   .and()
+   .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
 @Bean
