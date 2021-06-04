@@ -22,14 +22,14 @@ public class AuthController {
 	@Autowired
 	AuthService authService;
 	
-    //@CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody RegisterRequest registerRequest) {
     	authService.signup(registerRequest);
     	return new ResponseEntity<>(HttpStatus.OK);
     	
     }
-    
+    @CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/login")
     public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
         return authService.login(loginRequest);

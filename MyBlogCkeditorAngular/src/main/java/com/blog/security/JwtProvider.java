@@ -24,7 +24,7 @@ public class JwtProvider {
     public void init() {
         try {
             keyStore = KeyStore.getInstance("JKS");
-            InputStream resourceAsStream = getClass().getResourceAsStream("/springblog.jks");
+            InputStream resourceAsStream = getClass().getResourceAsStream("/myblog.jks");
             keyStore.load(resourceAsStream, "secret".toCharArray());
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new MyBlogExeption("Exception occured while loading keystore");
