@@ -1,4 +1,4 @@
-package com.blog.models;
+package com.blog.Security.Models;
 
 public class LoginRequest {
 	private String username;
