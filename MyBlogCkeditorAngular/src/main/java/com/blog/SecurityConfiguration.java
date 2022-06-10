@@ -1,4 +1,4 @@
-package com.blog.Security;
+package com.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -39,12 +39,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
            .sessionManagement()
            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
            .and()	   
- 		   .authorizeRequests()	   
-		   .antMatchers("/auth/login").permitAll()
+ 		   .authorizeRequests()
+		   .antMatchers("/blog/**").permitAll()
+		   .antMatchers("/image/**").permitAll()
+		   .antMatchers("/images/**").permitAll()
+		   .antMatchers("/auth/**").permitAll()
 		   .antMatchers("/users/**").hasRole("ADMIN")
-		   .antMatchers("/projectsmanager/**").hasAnyRole("ADMIN","USER")
+
 		   .anyRequest().authenticated();
-	        httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+	     //   httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 
 		
