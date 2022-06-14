@@ -3,6 +3,8 @@ package com.blog.controllers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -44,17 +46,48 @@ public class ImageUploadCkeditorController {
 	// Upload image with Ckeditor the response is information of image (UrlImage: JSON Object) in the server  
 	@RequestMapping(value = "uploadFile", method = RequestMethod.POST, produces = {
 			MimeTypeUtils.APPLICATION_JSON_VALUE })
-	public UrlImage fileUpload(@RequestParam("upload") MultipartFile file) throws IOException {
+	public Map<String, Object> fileUpload(@RequestParam("upload") MultipartFile file) throws IOException {
+		System.out.print("image uploading ...");
 		try {
 			File myFile = new File(FILE_DIRECTORY + file.getOriginalFilename());
 			myFile.createNewFile();
 			FileOutputStream fos = new FileOutputStream(myFile);
 			fos.write(file.getBytes());
 			fos.close();
-			return new UrlImage(true,
-					file.getOriginalFilename(), "http://localhost:8080/images/" + file.getOriginalFilename());
+			
+			/*
+			 Ckfinder FileUpload response format :
+			{
+			    "resourceType": "Files",
+			    "currentFolder": {
+			        "path": "/",
+			        "url": "/ckfinder/userfiles/files/",
+			        "acl": 255
+			    },
+			    "fileName": "fileName.jpg",
+			    "uploaded": 1
+			}
+			*/
+			
+		    HashMap<String, Object> currentFolder = new HashMap<>();
+		    currentFolder.put("path", "/");
+		    currentFolder.put("url", "http://localhost:8080/images/" + file.getOriginalFilename());
+		    currentFolder.put("acl", 255);
+		    
+
+		    HashMap<String, Object> reponse = new HashMap<>();
+		    reponse.put("resourceType", "Files");
+		    reponse.put("currentFolder", currentFolder);
+		    reponse.put("fileName", file.getOriginalFilename());
+		    reponse.put("uploaded", 1);
+		    
+		    
+			
+
+			
+			return reponse;
 		} catch (Exception e) {
-			return new UrlImage(false,"","");
+			return new HashMap<>();
 		}
 
 	}

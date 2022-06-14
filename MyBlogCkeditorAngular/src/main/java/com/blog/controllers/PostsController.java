@@ -60,8 +60,8 @@ public class PostsController {
 	
 	
 	@DeleteMapping("/posts/{id}")
-	public void deletePost(@PathVariable Long id) {
-		postServices.deletePost(id);	
+	public ResponseEntity<Long> deletePost(@PathVariable Long id) {
+		return postServices.deletePost(id);
 	}	
 	
 

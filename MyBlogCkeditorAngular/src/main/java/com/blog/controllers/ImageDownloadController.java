@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 public class ImageDownloadController {
 	@Value("${file.upload-dir}")
 	String FILE_DIRECTORY;
 	//Download main image of the post
 	//post-statement : <img [src]="post.imageLink" class="card-img" alt="..."> 
-	@CrossOrigin(origins = "http://localhost:4200")
+	
 	@RequestMapping(value="/images/{fileName}",method = RequestMethod.GET)
 	   public @ResponseBody void getImageOfPost(@PathVariable String fileName,HttpServletResponse response,HttpServletRequest request) throws 
 	      IOException,NullPointerException

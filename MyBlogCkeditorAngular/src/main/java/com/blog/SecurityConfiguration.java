@@ -40,14 +40,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
            .and()	   
  		   .authorizeRequests()
-		   .antMatchers("/blog/**").permitAll()
+		   .antMatchers(HttpMethod.POST, "/blog/**").hasRole("ADMIN")
+		   .antMatchers(HttpMethod.GET, "/blog/**").permitAll()
 		   .antMatchers("/image/**").permitAll()
-		   .antMatchers("/images/**").permitAll()
+	       .antMatchers(HttpMethod.GET,"/images/**").permitAll()
 		   .antMatchers("/auth/**").permitAll()
-		   .antMatchers("/users/**").hasRole("ADMIN")
-
 		   .anyRequest().authenticated();
-	     //   httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+	        httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 
 		

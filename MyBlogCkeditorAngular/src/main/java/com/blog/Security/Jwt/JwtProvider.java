@@ -52,7 +52,7 @@ public class JwtProvider {
 				.setSubject(subject)
 				.claim("roles", authorities.stream().map(ga->ga.getAuthority()).collect(Collectors.toList()))
 				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() * 1000*60*60*10))
+				.setExpiration(new Date(System.currentTimeMillis() + 1000*60*3600))
 				.signWith(SignatureAlgorithm.HS512, secret_key).compact();
 	}
     
