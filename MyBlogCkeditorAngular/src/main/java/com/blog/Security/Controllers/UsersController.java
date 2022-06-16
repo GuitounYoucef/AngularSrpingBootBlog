@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blog.Security.Models.PasswordUpdate;
 import com.blog.Security.Models.RegisterRequest;
 import com.blog.Security.Models.Users;
 import com.blog.Security.Repository.UserRepository;
@@ -48,5 +49,13 @@ public class UsersController {
 		System.out.println("saving user ...");
 		userService.upadateUser(registerRequest);
 		return new ResponseEntity<>(HttpStatus.OK);
-		}	
+		}
+	
+	@PutMapping("/updatepassword")
+	public boolean upadatePassword(@RequestBody PasswordUpdate passwordUpdateRequest)
+	{
+		if (userService.updatePassword(passwordUpdateRequest))
+		return true;
+		else return false;
+	}
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.blog.Security.Jwt.JwtProvider;
 import com.blog.Security.Models.AuthenticationResponse;
 import com.blog.Security.Models.LoginRequest;
+import com.blog.Security.Models.PasswordUpdate;
 import com.blog.Security.Models.RegisterRequest;
 import com.blog.Security.Models.Users;
 import com.blog.Security.Repository.UserRepository;
@@ -77,7 +78,23 @@ public class UserService {
     	//user.setUserpassword(passwordEncoder.encode(registerRequest.getPassword()));
     	user.setAccountStatus(registerRequest.getAccountStatus());
     	userRepository.save(user);
-    }    
+    }
+    
+    public boolean updatePassword(PasswordUpdate passwordUpdate)
+    {
+		Users user=userRepository.findByUserName(passwordUpdate.getUserName()).orElseThrow(() ->
+        new UsernameNotFoundException("No user found " + passwordUpdate.getUserName()));
+		
+        if (passwordEncoder.encode(passwordUpdate.getOledPassword()).equals(user.getUserpassword())) 
+        {
+        	user.setUserpassword(passwordEncoder.encode(passwordUpdate.getNewPassword()));
+        	userRepository.save(user);
+        	return true;
+        }
+        else return false;
+        
+        
+    }
     
     
 }

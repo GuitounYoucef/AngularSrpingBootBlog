@@ -32,7 +32,7 @@ public class AuthController {
 	
 	@PostMapping("/login")
     public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) throws Exception {
-		System.out.println(userService.login(loginRequest));
+		
 		return userService.login(loginRequest);
 		
     }
