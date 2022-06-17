@@ -1,24 +1,26 @@
 package com.blog.Security.Models;
 
-import javax.persistence.Column;
+
 
 public class PasswordUpdate {
     private Long id;
     private String userName;
-	private String oledPassword;
+	private String oldPassword;
     private String newPassword;
     
     
     
-    public PasswordUpdate() {
+    
+    
+	public PasswordUpdate() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public PasswordUpdate(Long id, String userName, String oledPassword, String newPassword) {
+	public PasswordUpdate(Long id, String userName, String oldPassword, String newPassword) {
 		super();
 		this.id = id;
 		this.userName = userName;
-		this.oledPassword = oledPassword;
+		this.oldPassword = oldPassword;
 		this.newPassword = newPassword;
 	}
 	public Long getId() {
@@ -33,11 +35,11 @@ public class PasswordUpdate {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getOledPassword() {
-		return oledPassword;
+	public String getOldPassword() {
+		return oldPassword;
 	}
-	public void setOledPassword(String oledPassword) {
-		this.oledPassword = oledPassword;
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
 	}
 	public String getNewPassword() {
 		return newPassword;
@@ -45,5 +47,6 @@ public class PasswordUpdate {
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
-
+    
+    
 }

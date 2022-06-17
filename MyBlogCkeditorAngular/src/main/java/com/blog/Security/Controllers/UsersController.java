@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.Security.Models.PasswordUpdate;
+import com.blog.Security.Models.PasswordUpdateResponse;
 import com.blog.Security.Models.RegisterRequest;
 import com.blog.Security.Models.Users;
 import com.blog.Security.Repository.UserRepository;
@@ -52,10 +53,16 @@ public class UsersController {
 		}
 	
 	@PutMapping("/updatepassword")
-	public boolean upadatePassword(@RequestBody PasswordUpdate passwordUpdateRequest)
+	public PasswordUpdateResponse upadatePassword(@RequestBody PasswordUpdate passwordUpdateRequest)
 	{
 		if (userService.updatePassword(passwordUpdateRequest))
-		return true;
-		else return false;
+		{
+	     System.out.print("password updated successfully");		
+		 return new PasswordUpdateResponse(1);
+		}
+		else {
+		     System.out.print("your old password was incorrectly typed");		
+			 return new PasswordUpdateResponse(0);
+			}
 	}
 }

@@ -84,14 +84,18 @@ public class UserService {
     {
 		Users user=userRepository.findByUserName(passwordUpdate.getUserName()).orElseThrow(() ->
         new UsernameNotFoundException("No user found " + passwordUpdate.getUserName()));
+		System.out.println(passwordEncoder.encode(passwordUpdate.getOldPassword()));
+		System.out.println(user.getUserpassword());
+
+	   
 		
-        if (passwordEncoder.encode(passwordUpdate.getOledPassword()).equals(user.getUserpassword())) 
+        if (passwordEncoder.matches(passwordUpdate.getOldPassword(), user.getUserpassword())) 
         {
         	user.setUserpassword(passwordEncoder.encode(passwordUpdate.getNewPassword()));
         	userRepository.save(user);
         	return true;
         }
-        else return false;
+        return false;
         
         
     }
