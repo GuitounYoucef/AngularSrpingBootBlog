@@ -1,5 +1,7 @@
 package com.blog.services;
 
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class PostServices {
 	
 
 	public Posts createPost(Posts post) {
+
+		Date creation_date = new Date();  
+		post.setCeationDate(creation_date);
 		return postsRepository.save(post);	
 	}
 

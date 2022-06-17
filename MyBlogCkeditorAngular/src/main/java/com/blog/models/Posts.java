@@ -1,5 +1,9 @@
 package com.blog.models;
 
+
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +23,13 @@ public class Posts {
 	@Column(name = "Title")
 	private String Title;
 
+	@Lob
+	@Column(name = "cardContent")
+	private String cardContent;
+	
+	@Column(name = "ceationDate")
+	private Date ceationDate;	
+	
 	@Lob
 	@Column(name = "Statement")
 	private String Statement;
@@ -70,10 +81,29 @@ public class Posts {
 		this.imageLink = imageLink;
 	}
 
+	public String getCardContent() {
+		return cardContent;
+	}
 
-	public Posts(String title, String statement, String imageLink, Long user_id) {
+	public void setCardContent(String cardContent) {
+		this.cardContent = cardContent;
+	}
+
+	public Date getCeationDate() {
+		return ceationDate;
+	}
+
+	public void setCeationDate(Date ceationDate) {
+		this.ceationDate = ceationDate;
+	}
+
+	public Posts(Long id, String title, String cardContent, Date ceationDate, String statement, String imageLink,
+			Long user_id) {
 		super();
+		this.id = id;
 		Title = title;
+		this.cardContent = cardContent;
+		this.ceationDate = ceationDate;
 		Statement = statement;
 		this.imageLink = imageLink;
 		User_id = user_id;
@@ -83,6 +113,9 @@ public class Posts {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
+
 	
 
 }
